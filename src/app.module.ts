@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeModule } from './api/recipe/recipe.module';
+import { IngredientModule } from './api/ingredient/ingredient.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { RecipeModule } from './api/recipe/recipe.module';
       database: 'recipe-app',
     }),
     RecipeModule,
+    IngredientModule,
   ],
   controllers: [],
   providers: [],

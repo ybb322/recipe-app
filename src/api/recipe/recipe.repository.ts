@@ -2,6 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Recipe } from './recipe.entity';
 import { Repository } from 'typeorm';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { NotFoundException } from '@nestjs/common';
 
 export class RecipeRepository {
   constructor(
@@ -10,14 +11,38 @@ export class RecipeRepository {
 
   async getAllRecipes(listFilterDto: ListFilterQueryDto) {
     const query = this.recipeRepository.createQueryBuilder('recipe');
-    const { filter_by, filter_value } = listFilterDto;
+    const { filter_by, filter_value, sort_by, sort_direction, offset, limit } =
+      listFilterDto;
 
-    if (filter_value) {
+    if (filter_by && filter_value) {
       query.andWhere(`(LOWER(recipe.${filter_by}) LIKE LOWER(:filter_value))`, {
         filter_value: `%${filter_value}%`,
       });
     }
-    console.log(await query.getMany());
+
+    if (sort_by && sort_direction) {
+      query.orderBy(sort_by, sort_direction);
+    }
+
     return await query.getMany();
+  }
+
+  async getRecipeById(id: number) {
+    const found = await this.recipeRepository.findOne({ where: { id } });
+
+    if (!found) {
+      throw new NotFoundException('Recipe not found');
+    }
+    return found;
+  }
+
+  async deleteRecipeById(id: number) {
+    const result = await this.recipeRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException('Recipe not found');
+    }
+
+    return result;
   }
 }

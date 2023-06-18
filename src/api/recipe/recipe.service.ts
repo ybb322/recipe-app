@@ -9,4 +9,12 @@ export class RecipeService {
   async getAllRecipes(listFilterDto: ListFilterQueryDto) {
     return await this.recipeRepository.getAllRecipes(listFilterDto);
   }
+
+  async getRecipeById(id: number) {
+    return await this.recipeRepository.getRecipeById(id);
+  }
+
+  async deleteRecipeById(id: number) {
+    return await this.recipeRepository.deleteRecipeById(id);
+  }
 }

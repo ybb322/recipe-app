@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { SortDirectionEnum } from './SortDirectionEnum';
 
 export class ListFilterQueryDto {
   @IsOptional()
@@ -9,7 +10,7 @@ export class ListFilterQueryDto {
 
   @IsOptional()
   @IsString()
-  sort_direction: string;
+  sort_direction: SortDirectionEnum;
 
   @IsString()
   @IsOptional()

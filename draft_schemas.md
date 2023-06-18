@@ -56,8 +56,6 @@ ___
 
 ### cuisine: string;
 
-### ingredients: string[];
-
 ### cooking_time: number;
 
 ### rating: number;

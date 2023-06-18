@@ -16,9 +16,6 @@ export class Recipe {
   @Column()
   cuisine: string;
 
-  @Column('text', { array: true })
-  ingredients: string[];
-
   @Column()
   cookingTime: number;
 

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
 import { NotFoundException } from '@nestjs/common';
 import { RecipeCreateDto } from './dto/recipeCreateDto';
+import { RecipeUpdateDto } from './dto/recipeUpdateDto';
 
 export class RecipeRepository {
   constructor(
@@ -50,5 +51,10 @@ export class RecipeRepository {
   async createRecipe(recipe: RecipeCreateDto) {
     console.log(recipe);
     await this.recipeRepository.insert(recipe);
+  }
+
+  async updateRecipe(id: number, recipe: RecipeUpdateDto) {
+    console.log(id, recipe);
+    await this.recipeRepository.update(id, recipe);
   }
 }

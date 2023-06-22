@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { RecipeRepository } from './recipe.repository';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
 import { RecipeCreateDto } from './dto/recipeCreateDto';
+import { RecipeUpdateDto } from './dto/recipeUpdateDto';
 
 @Injectable()
 export class RecipeService {
@@ -21,5 +22,9 @@ export class RecipeService {
 
   async createRecipe(recipe: RecipeCreateDto) {
     return await this.recipeRepository.createRecipe(recipe);
+  }
+
+  async updateRecipe(id: number, recipe: RecipeUpdateDto) {
+    return await this.recipeRepository.updateRecipe(id, recipe);
   }
 }

@@ -54,7 +54,10 @@ export class RecipeRepository {
   }
 
   async updateRecipe(id: number, recipe: RecipeUpdateDto) {
-    console.log(id, recipe);
-    await this.recipeRepository.update(id, recipe);
+    const result = await this.recipeRepository.update(id, recipe);
+    if (result.affected === 0) {
+      throw new NotFoundException('Recipe not found');
+    }
+    return result;
   }
 }

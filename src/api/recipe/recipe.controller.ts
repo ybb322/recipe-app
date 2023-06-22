@@ -1,6 +1,15 @@
-import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { RecipeCreateDto } from './dto/recipeCreateDto';
 
 @Controller('recipes')
 export class RecipeController {
@@ -19,5 +28,10 @@ export class RecipeController {
   @Delete('/:id')
   async deleteRecipeById(@Param('id') id: number) {
     return await this.recipeService.deleteRecipeById(id);
+  }
+
+  @Post()
+  async createRecipe(@Body() recipe: RecipeCreateDto) {
+    return await this.recipeService.createRecipe(recipe);
   }
 }

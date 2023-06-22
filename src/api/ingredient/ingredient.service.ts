@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IngredientRepository } from './ingredient.repository';
-import { IngredientDto } from './dto/IngredientDto';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { IngredientAddDto } from './dto/IngredientAddDto';
 
 @Injectable()
 export class IngredientService {
@@ -11,7 +11,7 @@ export class IngredientService {
     return await this.ingredientRepository.getAllIngredients(listFilterDto);
   }
 
-  async addIngredients(ingredients: Array<IngredientDto>) {
+  async addIngredients(ingredients: IngredientAddDto) {
     return await this.ingredientRepository.addIngredients(ingredients);
   }
 }

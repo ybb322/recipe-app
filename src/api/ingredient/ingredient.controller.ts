@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Put, Query } from '@nestjs/common';
 import { IngredientService } from './ingredient.service';
-import { IngredientDto } from './dto/IngredientDto';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { IngredientAddDto } from './dto/IngredientAddDto';
 
 @Controller('ingredients')
 export class IngredientController {
@@ -13,7 +13,7 @@ export class IngredientController {
   }
 
   @Put()
-  async addIngredients(@Body() ingredients: Array<IngredientDto>) {
+  async addIngredients(@Body() ingredients: IngredientAddDto) {
     return await this.ingredientService.addIngredients(ingredients);
   }
 }

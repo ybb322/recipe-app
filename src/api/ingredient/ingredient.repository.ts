@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ingredient } from './ingredient.entity';
 import { Repository } from 'typeorm';
-import { IngredientDto } from './dto/IngredientDto';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { IngredientAddDto } from './dto/IngredientAddDto';
 
 export class IngredientRepository {
   constructor(
@@ -31,9 +31,9 @@ export class IngredientRepository {
     return await query.getMany();
   }
 
-  async addIngredients(ingredients: Array<IngredientDto>) {
+  async addIngredients(ingredients: IngredientAddDto) {
     console.log(ingredients);
-    return await this.ingredientRepository.upsert(ingredients, {
+    return await this.ingredientRepository.upsert(ingredients.ingredients, {
       conflictPaths: ['name'],
       skipUpdateIfNoValuesChanged: true,
     });

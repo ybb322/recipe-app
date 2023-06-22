@@ -3,6 +3,7 @@ import { Recipe } from './recipe.entity';
 import { Repository } from 'typeorm';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
 import { NotFoundException } from '@nestjs/common';
+import { RecipeCreateDto } from './dto/recipeCreateDto';
 
 export class RecipeRepository {
   constructor(
@@ -44,5 +45,10 @@ export class RecipeRepository {
     }
 
     return result;
+  }
+
+  async createRecipe(recipe: RecipeCreateDto) {
+    console.log(recipe);
+    await this.recipeRepository.insert(recipe);
   }
 }

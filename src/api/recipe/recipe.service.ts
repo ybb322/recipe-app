@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RecipeRepository } from './recipe.repository';
 import { ListFilterQueryDto } from '../shared/dto/ListFilterQueryDto';
+import { RecipeCreateDto } from './dto/recipeCreateDto';
 
 @Injectable()
 export class RecipeService {
@@ -16,5 +17,9 @@ export class RecipeService {
 
   async deleteRecipeById(id: number) {
     return await this.recipeRepository.deleteRecipeById(id);
+  }
+
+  async createRecipe(recipe: RecipeCreateDto) {
+    return await this.recipeRepository.createRecipe(recipe);
   }
 }

@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Comment } from '../comment/comment.entity';
 
 @Entity('recipe')
 export class Recipe {
@@ -33,4 +34,7 @@ export class Recipe {
   @Column({ default: 0 })
   @IsNumber()
   rating: number;
+
+  @OneToMany(() => Comment, (comment) => comment.recipe)
+  comments: Comment;
 }

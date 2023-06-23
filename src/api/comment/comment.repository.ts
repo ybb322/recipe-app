@@ -12,10 +12,11 @@ export class CommentRepository {
   async getRecipeComments(recipeId: number) {
     const result = await this.commentRepository.find({
       where: {
-        recipeId: recipeId,
+        recipe: {
+          id: recipeId,
+        },
       },
     });
-
     if (!result) {
       throw new NotFoundException('Recipe not found');
     }

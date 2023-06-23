@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-@Entity('recipe')
-export class Recipe {
+@Entity('comment')
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,24 +13,21 @@ export class Recipe {
 
   @Column()
   @IsNotEmpty()
+  @IsNumber()
+  recipeId: number;
+
+  @Column()
+  @IsNotEmpty()
   @IsString()
   title: string;
 
-  @Column()
-  @IsNotEmpty()
+  @Column({ nullable: true })
   @IsString()
+  @IsOptional()
   description: string;
 
-  @Column()
-  @IsNotEmpty()
-  @IsString()
-  cuisine: string;
-
-  @Column()
-  @IsNotEmpty()
-  cookingTime: number;
-
-  @Column({ default: 0 })
+  @Column({ nullable: true })
   @IsNumber()
+  @IsOptional()
   rating: number;
 }

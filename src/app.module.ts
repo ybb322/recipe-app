@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeModule } from './api/recipe/recipe.module';
 import { IngredientModule } from './api/ingredient/ingredient.module';
+import { CommentModule } from './api/comment/comment.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { IngredientModule } from './api/ingredient/ingredient.module';
     }),
     RecipeModule,
     IngredientModule,
+    CommentModule,
   ],
   controllers: [],
   providers: [],

@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CommentService } from './comment.service';
+import { CommentCreateDto } from './dto/CommentCreateDto';
 
 @Controller('comments')
 export class CommentController {
@@ -8,5 +9,10 @@ export class CommentController {
   @Get('/:id')
   async getRecipeComments(@Param('id') recipeId: number) {
     return await this.commentService.getRecipeComments(recipeId);
+  }
+
+  @Post()
+  async createComment(@Body() comment: CommentCreateDto) {
+    return await this.commentService.createComment(comment);
   }
 }

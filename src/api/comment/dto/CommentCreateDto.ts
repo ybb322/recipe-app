@@ -6,10 +6,6 @@ export class CommentCreateDto {
   ownerId: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  recipeId: number;
-
-  @IsNotEmpty()
   @IsString()
   title: string;
 

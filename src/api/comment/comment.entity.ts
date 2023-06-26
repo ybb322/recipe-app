@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Recipe } from '../recipe/recipe.entity';
+import { JoinColumn } from 'typeorm';
 
 @Entity('comment')
 export class Comment {
@@ -27,6 +28,12 @@ export class Comment {
   @IsOptional()
   rating: number;
 
-  @ManyToOne(() => Recipe, (recipe) => recipe.comments)
+  @Column()
+  @IsNotEmpty()
+  @IsNumber()
+  recipeId: number;
+
+  @ManyToOne(() => Recipe, (recipe) => recipe)
+  @JoinColumn({ name: 'recipeId' })
   recipe: Recipe;
 }

@@ -28,4 +28,13 @@ export class CommentRepository {
     console.log(result);
     return result;
   }
+
+  async updateComment(commentId: number, comment: CommentCreateDto) {
+    const result = await this.commentRepository.update(
+      { id: commentId },
+      comment,
+    );
+    console.log(result);
+    return result;
+  }
 }

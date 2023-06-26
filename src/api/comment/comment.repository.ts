@@ -37,4 +37,13 @@ export class CommentRepository {
     console.log(result);
     return result;
   }
+
+  async deleteComment(id: number) {
+    const result = await this.commentRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException('Comment not found');
+    }
+
+    return result;
+  }
 }

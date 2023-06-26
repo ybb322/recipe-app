@@ -17,4 +17,8 @@ export class CommentService {
   async updateComment(commentId: number, comment: CommentCreateDto) {
     return await this.commentRepository.updateComment(commentId, comment);
   }
+
+  async deleteComment(id: number) {
+    return await this.commentRepository.deleteComment(id);
+  }
 }

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CommentCreateDto } from './dto/CommentCreateDto';
 
@@ -22,5 +30,10 @@ export class CommentController {
     @Body() comment: CommentCreateDto,
   ) {
     return await this.commentService.updateComment(commentId, comment);
+  }
+
+  @Delete('/:id')
+  async deleteComment(@Param('id') id: number) {
+    return await this.commentService.deleteComment(id);
   }
 }

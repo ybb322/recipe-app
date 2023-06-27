@@ -1,9 +1,15 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { IngredientDto } from '../../ingredient/dto/IngredientDto';
 
 export class RecipeCreateDto {
-  @IsNumber()
-  id: number;
-
   @IsNotEmpty()
   @IsNumber()
   ownerId: number;
@@ -24,4 +30,10 @@ export class RecipeCreateDto {
   @IsNumber()
   @IsPositive()
   cookingTime: number;
+
+  @IsNotEmpty()
+  @IsArray()
+  @Type(() => IngredientDto)
+  @ValidateNested({ each: true })
+  ingredients: IngredientDto[];
 }

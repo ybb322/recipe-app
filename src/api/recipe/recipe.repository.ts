@@ -50,7 +50,7 @@ export class RecipeRepository {
 
   async createRecipe(recipe: RecipeCreateDto) {
     console.log(recipe);
-    await this.recipeRepository.insert(recipe);
+    await this.recipeRepository.save(recipe);
   }
 
   async updateRecipe(id: number, recipe: RecipeUpdateDto) {

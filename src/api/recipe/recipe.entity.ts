@@ -1,6 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Comment } from '../comment/comment.entity';
+import { Ingredient } from '../ingredient/ingredient.entity';
 
 @Entity('recipe')
 export class Recipe {
@@ -26,7 +34,6 @@ export class Recipe {
   @IsNotEmpty()
   @IsString()
   cuisine: string;
-
   @Column()
   @IsNotEmpty()
   cookingTime: number;
@@ -37,4 +44,8 @@ export class Recipe {
 
   @OneToMany(() => Comment, (comment) => comment.recipe)
   comments: Comment;
+
+  @ManyToMany(() => Ingredient, { cascade: ['insert', 'update'] })
+  @JoinTable()
+  ingredients: Ingredient[];
 }
